@@ -122,8 +122,8 @@ class PhysicalAgent(BaseAgent):
     def generate_system_promt(self):
         prompt = ""
         prompt += "Instructions:\n"
-        prompt += "- The BraveNewWorld (BNW) game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
-        prompt += "- Map: BNW is a 2D grid-world game. The map size is 15*15.\n"
+        prompt += "- The AdaSociety game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
+        prompt += "- Map: AdaSociety is a 2D grid-world game. The map size is 15*15.\n"
         prompt += "    - Natural resources: [Wood, Stone, Coal, Iron]. Some of them can only be discovered with some specific tools, which will be introduced next.\n"
         prompt += "    - Tools: [Hammer, Torch]\n"
         prompt += "    - Craft tree:\n"
@@ -134,14 +134,13 @@ class PhysicalAgent(BaseAgent):
         prompt += "    - Default amount of all units in crafts is 1.\n"
         prompt += "\n"
         prompt += "- Player:\n"
-        prompt += "    - There are two kinds of player in the BNW, Carpenters and Miners.\n"
+        prompt += "    - There are two kinds of player in AdaSociety, Carpenters and Miners.\n"
         prompt += "    - The Carpenter can gather many woods, stones and irons and craft hammer, but can only own one hammer. The Carpenter CANNOT gather coal so it CANNOT craft torch, but its inventory can hold a lot of torches.\n"
         prompt += "    - The Miner can gather many woods and coals, so it can craft torch, but can only own one torch. The Miner CANNOT gather stone so it CANNOT craft hammer, but its inventory can hold a lot of hammers.\n"
         prompt += "    - For all players, the value of wood is 1, the value of stone is 1, the value of hammer is 5, the value of coal is 10, the value of torch is 30, the value of iron is 20.\n"
-        prompt += "    - Different players may be placed in the same coalition, and the rewards for players in the same coalition are split equally, so given the heterogeneity between carpenter and miner, players in the same coalition need to cooperate.\n"
+        prompt += "    - Different players may be placed in the same coalition, and the rewards for players in the same coalition are split by division_weight or equally, so given the heterogeneity between carpenter and miner, players in the same coalition need to cooperate.\n"
         prompt += "\n"
-        prompt += "Suppose you are a Carpenter named <carpenter_0>. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
-        prompt += "You can not craft torchs, but you can craft hammers.\n"
+        prompt += f"Suppose you are a player named {self.agent_name_list[self.agent_id]}. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
         prompt += "At each round in action phase, you will receive the current state:\n"
         prompt += "Step: ...\n"
         prompt += "Current surrounding social environment: ...\n"
@@ -341,7 +340,7 @@ class PhysicalAgent(BaseAgent):
         social_env_prompt = f"Current surrounding social environment:\n"
         for i in range(self.agent_num):
             social_env_prompt += f"coalition {i}:"
-            if social_state.has_node(GROUP.format(i)):
+            if social_state.has_node(GROUP.format(i)):  
                 coalition = social_state.successors(GROUP.format(i))
                 player = []
                 for key in coalition:
@@ -353,7 +352,14 @@ class PhysicalAgent(BaseAgent):
                     social_env_prompt += f"None.\n"
             else:
                 social_env_prompt += f"None.\n"
-        
+            weight = list(social_state.edges(GROUP.format(i), data=True))
+            if len(weight) > 0:
+                social_env_prompt += "division_weight: "
+            for j in range(len(weight)):
+                social_env_prompt += f"{self.player2name[weight[j][1]]}: "
+                social_env_prompt += str(weight[j][2]["division_weight"])
+                social_env_prompt += "; "
+            social_env_prompt += "\n"
         '''Physical state'''
         time_prompt = f"Step: {self.step}\n"
         
@@ -544,16 +550,16 @@ class PhysicalAgent(BaseAgent):
                     random_move = random.randint(0, 4)
                     self.Action.move_action(random_move)
                 else:
-                    if target_resource_pos[0] < self.position[0]:
+                    if target_resource_pos[1] < self.position[1]:
                         move = "move_left"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[0] > self.position[0]:
+                    elif target_resource_pos[1] > self.position[1]:
                         move = "move_right"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] < self.position[1]:
+                    elif target_resource_pos[0] < self.position[0]:
                         move = "move_up"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] > self.position[1]:
+                    elif target_resource_pos[0] > self.position[0]:
                         move = "move_down"
                         self.Action.move_action(self.Action.move_action_list.index(move))
                     else:
@@ -571,16 +577,16 @@ class PhysicalAgent(BaseAgent):
                     random_move = random.randint(0, 4)
                     self.Action.move_action(random_move)
                 else:
-                    if target_resource_pos[0] < self.position[0]:
+                    if target_resource_pos[1] < self.position[1]:
                         move = "move_left"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[0] > self.position[0]:
+                    elif target_resource_pos[1] > self.position[1]:
                         move = "move_right"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] < self.position[1]:
+                    elif target_resource_pos[0] < self.position[0]:
                         move = "move_up"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] > self.position[1]:
+                    elif target_resource_pos[0] > self.position[0]:
                         move = "move_down"
                         self.Action.move_action(self.Action.move_action_list.index(move))
                     else:

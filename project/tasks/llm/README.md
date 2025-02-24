@@ -2,7 +2,7 @@
 
 ### Deployment
 
-Please refer to the [llm_main.py](https://github.com/BNW-Team/Brave-New-World/blob/refactor/dev/llm_main.py) file for details.
+Please refer to the [llm_main.py](./llm_main.py) file for details.
 
 ```python
 # Retrieve the environment and LLM-related parameters，args.task_name is in ["easy_contract","hard_contract","easy_negotiation","hard_negotiation","social_structure"]
@@ -28,16 +28,16 @@ obs, reward, terminated, truncated, info = env.step(actions)
 
 ### How to use LLM
 
-- The LLMAgent class is located in the three minigames of   [project/tasks/llm](https://github.com/BNW-Team/Brave-New-World/tree/refactor/dev/project/tasks/llm)
+- The LLMAgent class is located in the three minigames of   [project/tasks/llm](.)
 - `system_prompt = generate_system_prompt(env)` , retrieves information from the environment, converts it into the system part of the prompt for the LLM-based agent, which serves as the fixed prompt for each round of action. This prompt mainly includes the game rules, agent features, and some examples.
 - `user_prompt = generate_state_prompt(obs)`, Receives the observations returned by the environment and converts them into the user part of the prompt for the LLM-based agent. This prompt changes with each round of action, primarily including the observations of each round and the set of actions available to the agent.
 - `action = update_policy(system_prompt + user_prompt)`, The LLM outputs the corresponding action based on the prompt.
 - You can change the LLM model being called by modifying args.model during the instantiation of the agents, `agent = LLMAgent(info，agent_id, agent_name, agent_name_list, env_agent_name_list, args.task_name, args.model)`
-- The API key is located in [openai_key.txt](https://github.com/BNW-Team/Brave-New-World/blob/refactor/dev/project/tasks/llm/openai_key.txt) file.
+- The API key is located in [openai_key.txt](./openai_key.txt) file.
 
 ### Quickstart
 
-Before starting the task, remember to change the loading path of the task from [main.json](https://github.com/BNW-Team/Brave-New-World/blob/refactor/dev/config/main.json) to the path of the corresponding task.
+Before starting the task, remember to change the loading path of the task from [main.json](../../../config/main.json) to the path of the corresponding task.
 
 ```bash
 # easy_contract

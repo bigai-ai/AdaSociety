@@ -122,8 +122,8 @@ class NegotiationAgent(BaseAgent):
         prompt = ""
         if self.task == "hard_negotiation":
             prompt += "Instructions:\n"
-            prompt += "- The BraveNewWorld (BNW) game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns, such as negotiating with others to exchange resources they need, or forming groups with others to share information and rewards.\n"
-            prompt += "- Map: BNW is a 2D grid-world game. The map size is 15*15.\n"
+            prompt += "- The AdaSociety game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns, such as negotiating with others to exchange resources they need, or forming groups with others to share information and rewards.\n"
+            prompt += "- Map: AdaSociety is a 2D grid-world game. The map size is 15*15.\n"
             prompt += "    - Natural resources: [Wood, Stone, Coal, Iron]. Some of them can only be discovered with some specific tools, which will be introduced next.\n"
             prompt += "    - Tools: [Hammer, Torch]\n"
             prompt += "    - Craft tree:\n"
@@ -144,7 +144,7 @@ class NegotiationAgent(BaseAgent):
             prompt += "    - miner_2: You can pick many woods and coals. You can not pick stone and iron. You can own many hammers. Your own inventory can ONLY own 1 torch.\n"
             prompt += "    - miner_3: You can pick many woods and coals. You can not pick stone and iron. You can own many hammers. Your own inventory can ONLY own 1 torch.\n"
             prompt += "\n"
-            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the BNW game. You are now in the first phase: negotiation phase. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
+            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the AdaSociety game. You are now in the first phase: negotiation phase. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
             prompt += "Join the coalition to share profits with other members according to the agreed-upon distribution ratio.\n"
             prompt += "At each round in negotiation phase, you will receive the current state:\n"
             prompt += "Step: ...\n"
@@ -272,8 +272,8 @@ class NegotiationAgent(BaseAgent):
 
         elif self.task == "easy_negotiation":
             prompt += "Instructions:\n"
-            prompt += "- The BraveNewWorld (BNW) game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
-            prompt += "- Map: BNW is a 2D grid-world game. The map size is 7*7.\n"
+            prompt += "- The AdaSociety game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
+            prompt += "- Map: AdaSociety is a 2D grid-world game. The map size is 7*7.\n"
             prompt += "    - Natural resources: [Wood, Stone].\n"
             prompt += "    - Tools: [Hammer]\n"
             prompt += "    - Craft tree:\n"
@@ -290,7 +290,7 @@ class NegotiationAgent(BaseAgent):
             prompt += "    - miner_0: can NOT own wood and stone, buy can own many hammers in inventory.\n"
             prompt += "    - miner_1: can NOT own wood and stone, buy can own many hammers in inventory.\n"
             prompt += "\n"
-            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the BNW game. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
+            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the AdaSociety game. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
             prompt += "Join the coalition to share profits with other members according to the agreed-upon distribution ratio.\n"
             prompt += "At each round in negotiation phase, you will receive the current state:\n"
             prompt += "Step: ...\n"
@@ -745,8 +745,8 @@ class Negotiation_PhysicalAgent(BaseAgent):
         prompt = ""
         if self.task == "easy_negotiation":
             prompt += "Instructions:\n"
-            prompt += "- The BraveNewWorld (BNW) game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
-            prompt += "- Map: BNW is a 2D grid-world game. The map size is 7*7.\n"
+            prompt += "- The AdaSociety game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
+            prompt += "- Map: AdaSociety is a 2D grid-world game. The map size is 7*7.\n"
             prompt += "    - Natural resources: [Wood, Stone].\n"
             prompt += "    - Tools: [Hammer]\n"
             prompt += "    - Craft tree:\n"
@@ -763,8 +763,8 @@ class Negotiation_PhysicalAgent(BaseAgent):
             prompt += "    - miner_0: can NOT own wood and stone, buy can own many hammers in inventory.\n"
             prompt += "    - miner_1: can NOT own wood and stone, buy can own many hammers in inventory.\n"
             prompt += "\n"
-            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the BNW game. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
-            prompt += "Join the coalition to share profits with other members according to the agreed-upon distribution ratio.\n"
+            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the AdaSociety game. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
+            prompt += "Join the coalition to share profits with other members according to the agreed-upon distribution ratio by division_weight.\n"
             prompt += "At each round in action phase, you will receive the current state:\n"
             prompt += "Step: ...\n"
             prompt += "Current surrounding social environment: ...\n"
@@ -868,8 +868,8 @@ class Negotiation_PhysicalAgent(BaseAgent):
 
         elif self.task == "hard_negotiation":
             prompt += "Instructions:\n"
-            prompt += "- The BraveNewWorld (BNW) game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
-            prompt += "- Map: BNW is a 2D grid-world game. The map size is 15*15.\n"
+            prompt += "- The AdaSociety game is an open-ended multi-agent environment. The game consists of a complex crafting tree, where the agent needs to obtain as many resources as possible in the limited time and craft tools to mine more advanced resources to maximize its benefit. At the same time, agents can also take other actions to help them increase their returns. The numbers of resources are limited.\n"
+            prompt += "- Map: AdaSociety is a 2D grid-world game. The map size is 15*15.\n"
             prompt += "    - Natural resources: [Wood, Stone, Coal, Iron]. Some of them can only be discovered with some specific tools, which will be introduced next.\n"
             prompt += "    - Tools: [Hammer, Torch]\n"
             prompt += "    - Craft tree:\n"
@@ -890,7 +890,7 @@ class Negotiation_PhysicalAgent(BaseAgent):
             prompt += "    - miner_2: You can gather many woods and coals. You can not gather stone and iron. You can own many hammers. Your own inventory can ONLY own 1 torch.\n"
             prompt += "    - miner_3: You can gather many woods and coals. You can not gather stone and iron. You can own many hammers. Your own inventory can ONLY own 1 torch.\n"
             prompt += "\n"
-            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the BNW game. You are now in the action phase. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
+            prompt += f"Suppose you are a player named <{self.agent_name_list[self.agent_id]}> in the AdaSociety game. You are now in the action phase. Your aim is to maximize your reward, which can gain from the resource value and the craft value.\n"
             prompt += "You can not craft torchs, but you can craft hammers.\n"
             prompt += "Join the coalition to share profits with other members according to the agreed-upon distribution ratio.\n"
             prompt += "At each round in action phase, you will receive the current state:\n"
@@ -1070,7 +1070,14 @@ class Negotiation_PhysicalAgent(BaseAgent):
                     social_env_prompt += f"None.\n"
             else:
                 social_env_prompt += f"None.\n"
-        
+            weight = list(social_state.edges(GROUP.format(i), data=True))
+            if len(weight) > 0:
+                social_env_prompt += "division_weight: "
+            for j in range(len(weight)):
+                social_env_prompt += f"{self.player2name[weight[j][1]]}: "
+                social_env_prompt += str(weight[j][2]["score"])
+                social_env_prompt += "; "
+            social_env_prompt += "\n"
         '''Physical state'''
         time_prompt = f"Step: {self.step}\n"
         
@@ -1288,16 +1295,16 @@ class Negotiation_PhysicalAgent(BaseAgent):
                     random_move = random.randint(0, 4)
                     self.Action.move_action(random_move)
                 else:
-                    if target_resource_pos[0] < self.position[0]:
+                    if target_resource_pos[1] < self.position[1]:
                         move = "move_left"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[0] > self.position[0]:
+                    elif target_resource_pos[1] > self.position[1]:
                         move = "move_right"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] < self.position[1]:
+                    elif target_resource_pos[0] < self.position[0]:
                         move = "move_up"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] > self.position[1]:
+                    elif target_resource_pos[0] > self.position[0]:
                         move = "move_down"
                         self.Action.move_action(self.Action.move_action_list.index(move))
                     else:
@@ -1315,16 +1322,16 @@ class Negotiation_PhysicalAgent(BaseAgent):
                     random_move = random.randint(0, 4)
                     self.Action.move_action(random_move)
                 else:
-                    if target_resource_pos[0] < self.position[0]:
+                    if target_resource_pos[1] < self.position[1]:
                         move = "move_left"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[0] > self.position[0]:
+                    elif target_resource_pos[1] > self.position[1]:
                         move = "move_right"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] < self.position[1]:
+                    elif target_resource_pos[0] < self.position[0]:
                         move = "move_up"
                         self.Action.move_action(self.Action.move_action_list.index(move))
-                    elif target_resource_pos[1] > self.position[1]:
+                    elif target_resource_pos[0] > self.position[0]:
                         move = "move_down"
                         self.Action.move_action(self.Action.move_action_list.index(move))
                     else:

@@ -40,7 +40,7 @@
   },
   "totem_making": {
     "in": {"gem": 2, "pottery": 1, "steel": 1},
-    "out": {"totem": 2},
+    "out": {"totem": 1},
     "requirements": {"gem": 1}
   }
 }

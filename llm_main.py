@@ -88,10 +88,10 @@ if __name__ == "__main__":
             if step == phase1_length:
                 agents = physical_agents
             if step >= phase1_length:
-                with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}.txt', 'a', encoding='utf-8') as file:
+                with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                     print(step, file=file)
             else:
-                with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}.txt', 'a', encoding='utf-8') as file:
+                with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                     print(step, file=file)
             actions = {}
             for agent_id in range(agent_num):
@@ -105,11 +105,11 @@ if __name__ == "__main__":
                 pre_position[agent_id] = copy.deepcopy(llm_obs['current_pos'])
                 actions[agent_name] = action
                 if step >= phase1_length-1:
-                    with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}.txt', 'a', encoding='utf-8') as file:
+                    with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                         print(f"agent {agent.agent_name_list[agent.env_agent_name_list.index(agent_name)]}'s current plan is {agent.current_plan}",file=file)
                         print(f"agent {agent.agent_name_list[agent.env_agent_name_list.index(agent_name)]}'s action is {action}",file=file)
                 else:
-                    with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}.txt', 'a', encoding='utf-8') as file:
+                    with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                         print(f"agent {agent.agent_name_list[agent.env_agent_name_list.index(agent_name)]}'s current plan is {agent.current_plan}",file=file)
                         print(f"agent {agent.agent_name_list[agent.env_agent_name_list.index(agent_name)]}'s action is {action}",file=file)
             next_obs, reward, terminated, truncated, info = env.step(actions)
@@ -117,16 +117,16 @@ if __name__ == "__main__":
             for agent_id in range(agent_num):
                 reward_total[agent_id] += reward[env_agent_name_list[agent_id]]
             if step >= phase1_length:
-                with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}.txt', 'a', encoding='utf-8') as file:
+                with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                     print("########## RESULT ###########",file=file)
                     print("Step: ", step,file=file)
                     print("Reward: ", reward,file=file)
             else:
-                with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}.txt', 'a', encoding='utf-8') as file:
+                with open(f'{OUTPUT_DIR}output_{args.task_name}_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
                     print("########## RESULT ###########",file=file)
                     print("Step: ", step,file=file)
                     print("Reward: ", reward,file=file)
         # env.env.save_video()
 
-        with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}.txt', 'a', encoding='utf-8') as file:
+        with open(f'{OUTPUT_DIR}output_{args.task_name}_physical_{episode}_{args.model}.txt', 'a', encoding='utf-8') as file:
             print(f"eps {episode} final payoff {reward_total}",file=file)
