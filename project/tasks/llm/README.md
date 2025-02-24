@@ -2,7 +2,7 @@
 
 ### Deployment
 
-Please refer to the [llm_main.py](./llm_main.py) file for details.
+Please refer to the [llm_main.py](../../../llm_main.py) file for details.
 
 ```python
 # Retrieve the environment and LLM-related parameters，args.task_name is in ["easy_contract","hard_contract","easy_negotiation","hard_negotiation","social_structure"]
