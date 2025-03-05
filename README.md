@@ -276,7 +276,7 @@ Our paper is available on [ArXiv](https://arxiv.org/abs/2411.03865). If you find
 @inproceedings{
 huang2024adasociety,
 title={AdaSociety: An Adaptive Environment with Social Structures for Multi-Agent Decision-Making},
-author={Yizhe Huang and Xingbo Wang and Hao Liu and Fanqi Kong and Aoyang Qin and Min Tang and Xiaoxi Wang and Song-Chun Zhu and Mingjie Bi and Siyuan Qi and Xue Feng},
+author={Yizhe Huang and Xingbo Wang and Hao Liu and Fanqi Kong and Aoyang Qin and Min Tang and Song-Chun Zhu and Mingjie Bi and Siyuan Qi and Xue Feng},
 booktitle={The Thirty-eight Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
 year={2024}
 }
