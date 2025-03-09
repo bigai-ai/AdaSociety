@@ -1,12 +1,8 @@
 import openai
-# import anthropic
 from rich import print as rprint
 import time
 from typing import Union
-import random
-import itertools, os, json, re
-from openai import AzureOpenAI
-
+from openai import OpenAI
 
 # Refer to https://platform.openai.com/docs/models/overview
 TOKEN_LIMIT_TABLE = {
@@ -19,6 +15,7 @@ TOKEN_LIMIT_TABLE = {
     "gpt-4-32k": 32768,
     "gpt-4-32k-0314": 32768,
 }
+
 
 def convert_messages_to_prompt(messages):
     """
@@ -156,15 +153,36 @@ class Module(object):
                     )
                     time.sleep(10)
                 elif 'gpt' in self.model:
-                    response = openai.chat.completions.create(
-                        model=self.model,
-                        messages=messages,
-                        stop=stop,
-                        temperature=temperature,
-                        max_tokens = 256
-                    )
-
-                    time.sleep(3)
+                    while True:
+                        try:
+                            response = openai.chat.completions.create(
+                                model=self.model,
+                                messages=messages,
+                                stop=stop,
+                                temperature=temperature,
+                                max_tokens=256
+                            )
+                            test = response.choices[0].message.content
+                            break
+                        except:
+                            print("try again!!!")
+                            time.sleep(5)
+                            continue
+                elif 'deepseek' in self.model:
+                    client = OpenAI(api_key=key, base_url="https://api.deepseek.com")
+                    while True:
+                        try:
+                            response = client.chat.completions.create(
+                                model="deepseek-chat",
+                                messages=messages,
+                                stream=False
+                            )
+                            test = response.choices[0].message.content
+                            break
+                        except:
+                            print("try again!!!")
+                            time.sleep(10)
+                            continue
                 elif 'claude' in self.model:
                     response = self.client.messages.create(
                         model="claude-2.1",
@@ -186,10 +204,9 @@ class Module(object):
         if self.model == 'claude':
             return response.message
         elif self.model in ['text-davinci-003']:
-            # return response["choices"][0]["text"]
             return response.choices[0].text
-        elif self.model in ['gpt-3.5-turbo-16k', 'gpt-3.5-turbo-0301', 'gpt-3.5-turbo', 'gpt-4', 'gpt-4-0314']:
-            # return response["choices"][0]["message"]["content"]
+        elif self.model in ['gpt-3.5-turbo-16k', 'gpt-3.5-turbo-0301', 'gpt-3.5-turbo', 'gpt-4', 'gpt-4-0314',
+                            "deepseek-chat", "deepseek-reasoner"]:
             return response.choices[0].message.content
 
     def restrict_dialogue(self):
