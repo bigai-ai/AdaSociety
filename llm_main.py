@@ -8,6 +8,12 @@ import os
 
 from project.tasks.llm.llm_env_wrapper import LLMEnvWrapper
 OUTPUT_DIR = "./project/tasks/llm/outputs/"
+PROMPT_DIR = "./project/tasks/llm/prompts/"
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+if not os.path.exists(PROMPT_DIR):
+    os.makedirs(PROMPT_DIR)
 
 def parse_args():
     parser = argparse.ArgumentParser()
